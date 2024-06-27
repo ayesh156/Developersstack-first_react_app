@@ -1,0 +1,397 @@
+//========================================= React component return methods
+
+import React from "react";
+
+function HelloReactApp() {
+  return (
+    <div>
+      <h1>Hello React...</h1>
+    </div>
+  );
+}
+
+//--------
+
+function HelloReactApp() {
+  return React.createElement('h1', {}, 'Hello React!..');
+}
+
+//--------
+
+function HelloReactApp() {
+  return React.createElement("div", {},
+    React.createElement("h1", {}, "Hello React!..")
+  );
+}
+
+export default HelloReactApp;
+
+
+//========================================= Fragment
+
+
+import React from "react";
+
+function App() {
+  return (
+    <div>
+      <div>
+        <h1>Customer Details</h1>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Kamal</td>
+            <td>Panadura</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+} 
+
+//--------
+
+function App() {
+  return (
+    <React.Fragment>
+      <div>
+        <h1>Customer Details</h1>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Kamal</td>
+            <td>Panadura</td>
+          </tr>
+        </tbody>
+      </table>
+    </React.Fragment>
+  );
+}
+
+//--------
+
+function App() {
+  return (
+    <>
+      <div>
+        <h1>Customer Details</h1>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Kamal</td>
+            <td>Panadura</td>
+          </tr>
+        </tbody>
+      </table>
+      </>
+  );
+}
+
+export default App;
+
+
+//========================================= Nexted Component
+
+
+function CustomerManager() {
+  return (
+    <div>
+      <Customer />
+      <Address />
+      <Salary />
+    </div>
+  );
+};
+
+function Customer() {
+  return <h1>Customer Name : Kamal Silva</h1>;
+}
+const Address = () => <h2>Address : Colombo</h2>;
+const Salary = () => {
+  return <h2>Salary : 2500</h2>
+}
+
+export default CustomerManager;
+
+
+//========================================= map function
+
+
+const userNames = ["nimal", "kamal", "jagath"];
+
+function UserManager() {
+  return (
+    <div className="wrapper">
+      {userNames.map((name) => {
+        return <h1>{name}</h1>;
+      })}
+    </div>
+  );
+}
+
+//--------
+
+const users = [
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-2.jpg",
+    name: "Eshara Uddipana",
+    designation: "Graphic Designer",
+    salary: "30000",
+  },
+  {
+    avatar: "img-4.jpg",
+    name: "TRashan Lakshan",
+    designation: "Angular Developer",
+    salary: "35000",
+  },
+];
+
+function UserManager() {
+  return (
+    <div className="wrapper">
+      {users.map((selectedUser) => {
+         const { avatar, name, designation, salary } = selectedUser;
+        return <User avatar={avatar} name={name} designation={designation} salary={salary} />;
+      })}
+    </div>
+  );
+}
+
+
+//========================================= map function with unique key
+
+
+const users = [
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-2.jpg",
+    name: "Eshara Uddipana",
+    designation: "Graphic Designer",
+    salary: "30000",
+  },
+  {
+    avatar: "img-4.jpg",
+    name: "TRashan Lakshan",
+    designation: "Angular Developer",
+    salary: "35000",
+  },
+];
+
+function UserManager() {
+  return (
+    <div className="wrapper">
+      {users.map((selectedUser, index) => {
+         const { avatar, name, designation, salary, code } = selectedUser;
+        return <User avatar={avatar} name={name} designation={designation} salary={salary} key={index} />;
+      })}
+    </div>
+  );
+}
+
+
+//========================================= 
+
+
+const users = [
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-2.jpg",
+    name: "Eshara Uddipana",
+    designation: "Graphic Designer",
+    salary: "30000",
+  },
+  {
+    avatar: "img-4.jpg",
+    name: "TRashan Lakshan",
+    designation: "Angular Developer",
+    salary: "35000",
+  },
+];
+
+function UserManager() {
+  return (
+    <div className="wrapper">
+      {users.map((user) => {
+        return <User user={user} key={user.code} />;
+      })}
+    </div>
+  );
+}
+
+const User = (props) => {
+  const { avatar, name, designation, salary } = props.user;
+  return (
+    <div className="user-outer">
+      <Avatar avatar={avatar} />
+      <UserData name={name} designation={designation} salary={salary}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum velit,
+        impedit id, minima voluptas veniam a aliquid cum fugiat quibusdam
+        laudantium at? Dignissimos, blanditiis porro.
+      </UserData>
+    </div>
+  );
+};
+
+
+//--------
+
+
+const users = [
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-1.jpg",
+    name: "Thisara Lakshan",
+    designation: "Graphic Designer",
+    salary: "15000",
+  },
+  {
+    avatar: "img-2.jpg",
+    name: "Eshara Uddipana",
+    designation: "Graphic Designer",
+    salary: "30000",
+  },
+  {
+    avatar: "img-4.jpg",
+    name: "TRashan Lakshan",
+    designation: "Angular Developer",
+    salary: "35000",
+  },
+];
+
+function UserManager() {
+  return (
+    <div className="wrapper">
+      {users.map((user) => {
+        return <User {...user} key={user.code} />;
+      })}
+    </div>
+  );
+}
+
+const User = (props) => {
+  const { avatar, name, designation, salary } = props;
+  return (
+    <div className="user-outer">
+      <Avatar avatar={avatar} />
+      <UserData name={name} designation={designation} salary={salary}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum velit,
+        impedit id, minima voluptas veniam a aliquid cum fugiat quibusdam
+        laudantium at? Dignissimos, blanditiis porro.
+      </UserData>
+    </div>
+  );
+};
+
+
+//========================================= Events
+
+
+const SearchForm = () => {
+
+  const manageChangeEvent = (e) => {
+    console.log(e.target.value);
+  }
+  const manageClickEvent = (e) => {
+    console.log('manageClickEvent');
+  }
+  const manageSubmitEvent = (e) => {
+    e.preventDefault();
+    console.log('manageSubmitEvent');
+  }
+
+  return (
+    <div className="search-outer">
+      <form onSubmit={manageSubmitEvent}>
+        <input type="search" onChange={manageChangeEvent} /> | <button type='submit' onClick={manageClickEvent}>Search Now</button>
+      </form>
+    </div>
+  )
+}
+
+
+//--------
+
+
+const SearchForm = () => {
+
+  return (
+    <div className="search-outer">
+      <form onSubmit={(e) => {
+    e.preventDefault();
+    console.log('manageSubmitEvent');
+  }}>
+        <input type="search" onChange={(e) => {
+    console.log(e.target.value);
+  }} /> | <button type='submit' onClick={(e) => {
+    console.log('manageClickEvent');
+  }}>Search Now</button>
+      </form>
+    </div>
+  )
+}
